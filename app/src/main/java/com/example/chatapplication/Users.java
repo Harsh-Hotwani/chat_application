@@ -2,7 +2,7 @@ package com.example.chatapplication;
 
 public class Users {
     String profilepic,useremail,userName,password,userId,lastMessage,status;
-
+    public Users(){};
     public Users(String userId, String userName, String useremail, String password, String profilepic, String status) {
         this.userId = userId;
         this.userName = userName;
