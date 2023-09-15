@@ -1,9 +1,16 @@
 package com.example.chatapplication;
 
-public class User {
-    String profilepic,email,userName,password,userId,lastMessage,status;
+public class Users {
+    String profilepic,useremail,userName,password,userId,lastMessage,status;
 
-    public Users(){}
+    public Users(String userId, String userName, String useremail, String password, String profilepic, String status) {
+        this.userId = userId;
+        this.userName = userName;
+        this.useremail = useremail;
+        this.password = password;
+        this.profilepic = profilepic;
+        this.status = status;
+    }
 
     public String getProfilepic() {
         return profilepic;
@@ -14,11 +21,11 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return useremail;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.useremail = email;
     }
 
     public String getUserName() {
