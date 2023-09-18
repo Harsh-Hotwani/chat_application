@@ -3,6 +3,7 @@ package com.example.chatapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,10 +24,15 @@ public class login extends AppCompatActivity {
     EditText username,password;
     TextView text;
     FirebaseAuth auth;
+
+    android.app.ProgressDialog progressDialog ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("please wait");
+        progressDialog.setCancelable(false);
         getSupportActionBar().hide();
 
         auth = FirebaseAuth.getInstance();
@@ -43,14 +49,18 @@ public class login extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(loginEmail))
                 {
+                    progressDialog.dismiss();
                     Toast.makeText(login.this, "enter the email", Toast.LENGTH_SHORT).show();
                 }
                 else if(TextUtils.isEmpty(loginPass))
                 {
+                    progressDialog.dismiss();
                     Toast.makeText(login.this, "enter your password", Toast.LENGTH_SHORT).show();
                 } else if (!loginEmail.matches(emailPattern)) {
+                    progressDialog.dismiss();
                     username.setError("please enter a valid email");
                 } else if (loginPass.length()<6) {
+                    progressDialog.dismiss();
                     password.setError("more than 6 characters");
                     Toast.makeText(login.this, "password must be greater than 6 characters", Toast.LENGTH_SHORT).show();
                 }
@@ -59,7 +69,7 @@ public class login extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                //                            progressDialog.show();
+                                progressDialog.show();
                                 try {
                                     Intent intent = new Intent(login.this, MainActivity.class);
                                     startActivity(intent);

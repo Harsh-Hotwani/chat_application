@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,10 +41,15 @@ public class registration extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseStorage storage;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("wait until the registration complete");
+        progressDialog.setCancelable(false);
         getSupportActionBar().hide();
 
         database = FirebaseDatabase.getInstance();
@@ -77,15 +83,19 @@ public class registration extends AppCompatActivity {
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
                 if(TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)){
+                    progressDialog.dismiss();
                     Toast.makeText(registration.this, "please enter a valib information", Toast.LENGTH_SHORT).show();
                 }
                 else if (!email.matches(emailPattern)) {
+                    progressDialog.dismiss();
                     rg_email.setError("enter a valid email address");
                 }
                 else if (password.length()<6) {
+                    progressDialog.dismiss();
                     rg_password.setError("password must be 6 character or more");
                 }
                 else if (!password.equals(confirmPassword)) {
+                    progressDialog.dismiss();
                     rg_repassword.setError("password does not match");
                 }
                 else {
@@ -111,6 +121,7 @@ public class registration extends AppCompatActivity {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 if (task.isSuccessful()) {
+                                                                    progressDialog.show();
                                                                     Intent intent = new Intent(registration.this, MainActivity.class);
                                                                     startActivity(intent);
                                                                     finish();
@@ -133,6 +144,7 @@ public class registration extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
+                                                progressDialog.show();
                                                 Intent intent = new Intent(registration.this, MainActivity.class);
                                                 startActivity(intent);
                                                 finish();
