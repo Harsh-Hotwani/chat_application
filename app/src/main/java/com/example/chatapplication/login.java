@@ -47,6 +47,7 @@ public class login extends AppCompatActivity {
                 String loginPass = password.getText().toString();
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
+                progressDialog.show();
                 if (TextUtils.isEmpty(loginEmail))
                 {
                     progressDialog.dismiss();
@@ -69,15 +70,17 @@ public class login extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                progressDialog.show();
+//                                progressDialog.show();
                                 try {
                                     Intent intent = new Intent(login.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } catch (Exception e) {
+                                    progressDialog.dismiss();
                                     Toast.makeText(login.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             } else {
+                                progressDialog.dismiss();
                                 Toast.makeText(login.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }

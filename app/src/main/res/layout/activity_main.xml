@@ -53,27 +53,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/_25sdp"
+        android:layout_marginBottom="32dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/message"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_25sdp"
             android:src="@drawable/message2128" />
 
         <ImageView
             android:id="@+id/settingBut"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_50sdp"
             android:src="@drawable/settings_128" />
 
         <ImageView
             android:id="@+id/camBut"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_50sdp"
             android:src="@drawable/camera_128" />
     </LinearLayout>

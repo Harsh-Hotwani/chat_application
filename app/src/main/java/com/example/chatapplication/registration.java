@@ -82,6 +82,7 @@ public class registration extends AppCompatActivity {
                 String status = "hello,world!!!";
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
+                progressDialog.show();
                 if(TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)){
                     progressDialog.dismiss();
                     Toast.makeText(registration.this, "please enter a valib information", Toast.LENGTH_SHORT).show();
@@ -121,12 +122,13 @@ public class registration extends AppCompatActivity {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 if (task.isSuccessful()) {
-                                                                    progressDialog.show();
+//                                                                    progressDialog.show();
                                                                     Intent intent = new Intent(registration.this, MainActivity.class);
                                                                     startActivity(intent);
                                                                     finish();
                                                                 }
                                                                 else {
+                                                                    progressDialog.dismiss();
                                                                     Toast.makeText(registration.this, "Error in creating the user", Toast.LENGTH_SHORT).show();
                                                                 }
                                                             }
@@ -144,12 +146,13 @@ public class registration extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                progressDialog.show();
+//                                                progressDialog.show();
                                                 Intent intent = new Intent(registration.this, MainActivity.class);
                                                 startActivity(intent);
                                                 finish();
                                             }
                                             else {
+                                                progressDialog.dismiss();
                                                 Toast.makeText(registration.this, "Error in creating the user", Toast.LENGTH_SHORT).show();
                                             }
                                         }
@@ -158,6 +161,7 @@ public class registration extends AppCompatActivity {
 
                             }
                             else {
+                                progressDialog.dismiss();
                                 Toast.makeText(registration.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
