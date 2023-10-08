@@ -27,18 +27,20 @@
             android:layout_gravity="right">
 
             <TextView
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="enter your name"
+                android:text="name"
                 android:textColor="@color/black"
-                android:textSize="23.40dp"/>
+                android:textSize="23.40dp" />
 
             <TextView
+                android:id="@+id/userstatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="status"
                 android:fontFamily="@font/poppins_black"
-                android:textSize="10.40dp"/>
+                android:text="status"
+                android:textSize="10.40dp" />
 
         </LinearLayout>
 
