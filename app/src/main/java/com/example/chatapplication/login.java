@@ -87,7 +87,6 @@ public class login extends AppCompatActivity {
                     });
                 }
             }
-
         });
         text.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,11 +29,17 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     ArrayList<Users> usersArrayList;
 
+    ImageView logoutbutton;
+    android.app.ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("please wait");
+        progressDialog.setCancelable(false);
 
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -59,6 +68,19 @@ public class MainActivity extends AppCompatActivity {
         mainUserRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         userAdapter=new UserAdapter(MainActivity.this,usersArrayList);
         mainUserRecyclerView.setAdapter(userAdapter);
+
+        logoutbutton=findViewById(R.id.logoutimg);
+
+        logoutbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog.show();
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MainActivity.this,login.class);
+                startActivity(intent);
+            }
+        });
+
 
         if (auth.getCurrentUser() == null)
         {
