@@ -1,10 +1,12 @@
 package com.example.chatapplication;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +39,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.viewholder> {
         holder.userstatus.setText(users.status);
         Picasso.get().load(users.profilepic).into(holder.imageView);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mainActivity,chatActivity.class);
+                intent.putExtra("nameeee",users.getUserName());
+                intent.putExtra("receiverimg",users.getProfilepic());
+                intent.putExtra("id",users.getUserId());
+                mainActivity.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
